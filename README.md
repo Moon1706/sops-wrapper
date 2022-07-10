@@ -6,7 +6,8 @@
 [![NPM](https://nodei.co/npm/sops-wrapper.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/sops-wrapper/)
 
 This module works as a wrapper for the Sops tool to Yaml and Json files.
-**Important:** you must have Sops utile before start this module.
+
+**Important:** you must have Sops utile before starting this module.
 
 #### Example
 

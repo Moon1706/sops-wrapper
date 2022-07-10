@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: "Sops Binary Installer"
+        uses: mdgreenwald/mozilla-sops-action@v1.2.0
       - name: "Install NPM requirements"
         run: npm install
       - name: "Lint"
