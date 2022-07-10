@@ -1,0 +1,43 @@
+name: default
+
+on:
+  pull_request:
+    branches: [develop, main]
+    paths-ignore:
+      - "README.md"
+      - "LICENSE"
+  push:
+    branches: [develop, main]
+    paths-ignore:
+      - "README.md"
+      - "LICENSE"
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Install NPM requirements"
+        run: npm install
+      - name: "Lint"
+        run: npm run lint
+      - name: "Build"
+        run: npm run build
+      - name: "Test"
+        run: npm run test
+  publish:
+    runs-on: ubuntu-latest
+    needs: [check]
+    if: |
+      github.event_name == 'push' &&
+      github.ref_name == 'main'
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Install NPM requirements"
+        run: npm install
+      - name: "Build module"
+        run: npm run build
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
